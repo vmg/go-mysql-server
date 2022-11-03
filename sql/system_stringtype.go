@@ -17,8 +17,8 @@ package sql
 import (
 	"reflect"
 
-	"github.com/dolthub/vitess/go/sqltypes"
-	"github.com/dolthub/vitess/go/vt/proto/query"
+	"vitess.io/vitess/go/sqltypes"
+	"vitess.io/vitess/go/vt/proto/query"
 )
 
 var systemStringValueType = reflect.TypeOf(string(""))

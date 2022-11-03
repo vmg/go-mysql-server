@@ -3,11 +3,11 @@ package parse
 import (
 	"testing"
 
-	ast "github.com/dolthub/vitess/go/vt/sqlparser"
 	"github.com/stretchr/testify/require"
+	ast "vitess.io/vitess/go/test/go-mysql-server/internal/sqlparser"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
 )
 
 func TestWindowFrameGetters(t *testing.T) {

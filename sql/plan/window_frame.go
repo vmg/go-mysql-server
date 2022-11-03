@@ -3,7 +3,7 @@ package plan
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 //go:generate optgen -out window_frame.og.go -pkg plan frame window_frame.go

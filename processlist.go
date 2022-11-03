@@ -19,9 +19,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sirupsen/logrus"
-
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/vt/log"
 )
 
 // ProcessList is a structure that keeps track of all the processes and their
@@ -213,7 +212,7 @@ func (pl *ProcessList) Kill(connID uint32) {
 
 	for pid, proc := range pl.procs {
 		if proc.Connection == connID {
-			logrus.Infof("kill query: pid %d", pid)
+			log.Infof("kill query: pid %d", pid)
 			proc.Done()
 			delete(pl.procs, pid)
 		}

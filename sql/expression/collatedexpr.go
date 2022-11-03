@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // CollatedExpression represents an expression (returning a string or byte slice) that carries a collation (which

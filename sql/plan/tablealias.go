@@ -20,7 +20,7 @@ import (
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // TableAlias is a node that acts as a table with a given name.

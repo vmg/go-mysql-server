@@ -14,7 +14,7 @@
 
 package in_mem_table
 
-import "github.com/dolthub/go-mysql-server/sql"
+import "vitess.io/vitess/go/test/go-mysql-server/sql"
 
 // DataEditor allows for a table to process alteration statements on its data.
 type DataEditor struct {

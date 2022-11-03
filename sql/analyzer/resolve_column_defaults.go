@@ -15,15 +15,15 @@
 package analyzer
 
 import (
-	"github.com/dolthub/vitess/go/sqltypes"
+	"vitess.io/vitess/go/sqltypes"
 
-	"github.com/dolthub/go-mysql-server/sql/information_schema"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/information_schema"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/parse"
-	"github.com/dolthub/go-mysql-server/sql/plan"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/parse"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/plan"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 )
 
 // validColumnDefaultFuncs is the set of functions that are legal in a column default value

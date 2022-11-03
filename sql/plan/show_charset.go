@@ -15,9 +15,9 @@
 package plan
 
 import (
-	"github.com/dolthub/vitess/go/sqltypes"
+	"vitess.io/vitess/go/sqltypes"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 type ShowCharset struct {

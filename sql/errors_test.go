@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/dolthub/vitess/go/mysql"
+	"vitess.io/vitess/go/mysql"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

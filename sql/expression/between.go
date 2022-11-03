@@ -17,7 +17,7 @@ package expression
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // Between checks a value is between two given values.

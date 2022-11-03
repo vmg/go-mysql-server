@@ -17,7 +17,7 @@ package function
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // If function returns the second value if the first is true, the third value otherwise.

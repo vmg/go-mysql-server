@@ -14,9 +14,9 @@ func TestFrameFactoryGen(t *testing.T) {
 		expected: `
 		import (
 		  "fmt"
-		  "github.com/dolthub/go-mysql-server/sql"
-		  "github.com/dolthub/go-mysql-server/sql/plan"
-		  ast "github.com/dolthub/vitess/go/vt/sqlparser"
+		  "vitess.io/vitess/go/test/go-mysql-server/sql"
+		  "vitess.io/vitess/go/test/go-mysql-server/sql/plan"
+		  ast "vitess.io/vitess/go/test/go-mysql-server/internal/sqlparser"
 		)
 		
 		func NewFrame(ctx *sql.Context, f *ast.Frame) (sql.WindowFrame, error) {

@@ -20,11 +20,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dolthub/vitess/go/sqltypes"
-	"github.com/dolthub/vitess/go/vt/proto/query"
+	"vitess.io/vitess/go/sqltypes"
+	"vitess.io/vitess/go/vt/proto/query"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 )
 
 var typeToNumericPrecision = map[query.Type]int{

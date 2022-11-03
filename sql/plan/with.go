@@ -17,7 +17,7 @@ package plan
 import (
 	"strings"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // With is a node to wrap the top-level node in a query plan so that any common table expressions can be applied in

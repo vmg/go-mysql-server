@@ -21,11 +21,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dolthub/vitess/go/sqltypes"
-	"github.com/dolthub/vitess/go/vt/proto/query"
-	"github.com/dolthub/vitess/go/vt/sqlparser"
 	"github.com/shopspring/decimal"
 	"gopkg.in/src-d/go-errors.v1"
+	"vitess.io/vitess/go/sqltypes"
+	"vitess.io/vitess/go/test/go-mysql-server/internal/sqlparser"
+	"vitess.io/vitess/go/vt/proto/query"
 )
 
 var (

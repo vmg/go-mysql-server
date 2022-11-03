@@ -19,7 +19,7 @@ import (
 	"reflect"
 	"testing"
 
-	querypb "github.com/dolthub/vitess/go/vt/proto/query"
+	querypb "vitess.io/vitess/go/vt/proto/query"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

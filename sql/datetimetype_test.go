@@ -20,8 +20,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dolthub/vitess/go/sqltypes"
-	"github.com/dolthub/vitess/go/vt/proto/query"
+	"vitess.io/vitess/go/sqltypes"
+	"vitess.io/vitess/go/vt/proto/query"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

@@ -17,7 +17,7 @@ package plan
 import (
 	"sync"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // NewHashLookup returns a node that performs an indexed hash lookup

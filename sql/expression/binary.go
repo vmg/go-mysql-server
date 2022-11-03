@@ -17,7 +17,7 @@ package expression
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // The BINARY operator converts the expression to a binary string (a string that has the binary character set and binary

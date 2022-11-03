@@ -20,8 +20,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/in_mem_table"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/in_mem_table"
 )
 
 // User represents a user from the user Grant Table.

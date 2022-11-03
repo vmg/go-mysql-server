@@ -16,13 +16,10 @@ package analyzer
 
 import (
 	"os"
-	"strconv"
 
-	"github.com/go-kit/kit/metrics/discard"
-
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/plan"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/plan"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 )
 
 func init() {
@@ -37,10 +34,6 @@ const (
 )
 
 var (
-	// ParallelQueryCounter describes a metric that accumulates
-	// number of parallel queries monotonically.
-	ParallelQueryCounter = discard.NewCounter()
-
 	SingleThreadFeatureFlag = false
 )
 
@@ -76,8 +69,6 @@ func parallelize(ctx *sql.Context, a *Analyzer, node sql.Node, scope *Scope, sel
 		if !isParallelizable(node) {
 			return node, transform.SameTree, nil
 		}
-		ParallelQueryCounter.With("parallelism", strconv.Itoa(a.Parallelism)).Add(1)
-
 		return plan.NewExchange(a.Parallelism, node), transform.NewTree, nil
 	})
 	if err != nil {

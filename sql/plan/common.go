@@ -15,8 +15,8 @@
 package plan
 
 import (
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 )
 
 // IsUnary returns whether the node is unary or not.

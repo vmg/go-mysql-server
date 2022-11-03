@@ -1,6 +1,6 @@
 package aggregation
 
-import "github.com/dolthub/go-mysql-server/optgen/cmd/support"
+import "vitess.io/vitess/go/test/go-mysql-server/optgen/cmd/support"
 
 //go:generate optgen -out unary_aggs.og.go -pkg aggregation aggs unary_aggs.go
 

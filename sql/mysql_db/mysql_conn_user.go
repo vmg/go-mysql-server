@@ -15,8 +15,8 @@
 package mysql_db
 
 import (
-	"github.com/dolthub/vitess/go/mysql"
-	"github.com/dolthub/vitess/go/vt/proto/query"
+	"vitess.io/vitess/go/mysql"
+	"vitess.io/vitess/go/vt/proto/query"
 )
 
 // MysqlConnectionUser is stored in mysql's connection as UserData once a connection has been authenticated.

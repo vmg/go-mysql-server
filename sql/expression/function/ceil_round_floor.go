@@ -21,8 +21,8 @@ import (
 	"reflect"
 	"strconv"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
 )
 
 // Ceil returns the smallest integer value not less than X.

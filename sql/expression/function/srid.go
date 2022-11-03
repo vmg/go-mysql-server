@@ -20,8 +20,8 @@ import (
 
 	"gopkg.in/src-d/go-errors.v1"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
 )
 
 // SRID is a function that returns SRID of Geometry object or returns a new object with altered SRID.

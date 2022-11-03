@@ -17,14 +17,14 @@ package analyzer
 import (
 	"fmt"
 
-	"github.com/dolthub/vitess/go/vt/sqlparser"
+	"vitess.io/vitess/go/test/go-mysql-server/internal/sqlparser"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/expression/function"
-	"github.com/dolthub/go-mysql-server/sql/parse"
-	"github.com/dolthub/go-mysql-server/sql/plan"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression/function"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/parse"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/plan"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 )
 
 // validateCheckConstraints validates DDL nodes that create table check constraints, such as CREATE TABLE and

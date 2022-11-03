@@ -19,8 +19,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/dolthub/go-mysql-server/memory"
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/memory"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 func TestDatabase_Name(t *testing.T) {

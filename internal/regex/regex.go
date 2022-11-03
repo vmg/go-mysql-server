@@ -15,7 +15,6 @@
 package regex
 
 import (
-	"github.com/go-kit/kit/metrics/discard"
 	errors "gopkg.in/src-d/go-errors.v1"
 )
 
@@ -52,14 +51,6 @@ type DisposableMatcher interface {
 
 // Constructor creates a new Matcher.
 type Constructor func(re string) (Matcher, Disposer, error)
-
-var (
-	// CompileHistogram describes a regexp compile time.
-	CompileHistogram = discard.NewHistogram()
-
-	// MatchHistogram describes a regexp match time.
-	MatchHistogram = discard.NewHistogram()
-)
 
 // Register add a new regex engine to the registry.
 func Register(name string, c Constructor) error {

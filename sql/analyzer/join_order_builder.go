@@ -20,11 +20,11 @@ import (
 	"math/bits"
 	"strings"
 
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/plan"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/plan"
 )
 
 // joinOrderBuilder enumerates valid plans for a join tree.  We build the join

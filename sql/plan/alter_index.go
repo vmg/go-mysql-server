@@ -19,10 +19,10 @@ import (
 	"io"
 	"strings"
 
-	"github.com/dolthub/vitess/go/mysql"
 	"gopkg.in/src-d/go-errors.v1"
+	"vitess.io/vitess/go/mysql"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 var (

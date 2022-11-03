@@ -18,8 +18,8 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
 )
 
 // IsBinary is a function that returns whether a blob is binary or not.

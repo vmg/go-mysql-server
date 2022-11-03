@@ -21,15 +21,15 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/dolthub/go-mysql-server/memory"
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/analyzer"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/expression/function"
-	"github.com/dolthub/go-mysql-server/sql/mysql_db"
-	"github.com/dolthub/go-mysql-server/sql/parse"
-	"github.com/dolthub/go-mysql-server/sql/plan"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/memory"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/analyzer"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression/function"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/mysql_db"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/parse"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/plan"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 )
 
 // Config for the Engine.
@@ -350,8 +350,6 @@ func (e *Engine) analyzeQuery(ctx *sql.Context, query string, parsed sql.Node, b
 }
 
 func (e *Engine) analyzePreparedQuery(ctx *sql.Context, query string, bindings map[string]sql.Expression) (sql.Node, error) {
-	ctx.GetLogger().Tracef("optimizing prepared plan for query: %s", query)
-
 	analyzed := e.preparedNode(ctx)
 	analyzed, err := analyzer.DeepCopyNode(analyzed)
 	if err != nil {
@@ -364,14 +362,12 @@ func (e *Engine) analyzePreparedQuery(ctx *sql.Context, query string, bindings m
 			return nil, err
 		}
 	}
-	ctx.GetLogger().Tracef("plan before re-opt: %s", analyzed.String())
 
 	analyzed, _, err = e.Analyzer.AnalyzePrepared(ctx, analyzed, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	ctx.GetLogger().Tracef("plan after re-opt: %s", analyzed.String())
 	return analyzed, nil
 }
 
@@ -468,7 +464,6 @@ func (e *Engine) beginTransaction(ctx *sql.Context, transactionDatabase string) 
 	// TODO: this won't work with transactions that cross database boundaries, we need to detect that and error out
 	beginNewTransaction := ctx.GetTransaction() == nil || plan.ReadCommitted(ctx)
 	if beginNewTransaction {
-		ctx.GetLogger().Tracef("beginning new transaction")
 		if len(transactionDatabase) > 0 {
 			database, err := e.Analyzer.Catalog.Database(ctx, transactionDatabase)
 			// if the database doesn't exist, just don't start a transaction on it, let other layers complain

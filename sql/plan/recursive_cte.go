@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 const cteRecursionLimit = 1000

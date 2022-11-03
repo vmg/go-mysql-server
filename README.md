@@ -53,23 +53,23 @@ What's the use case of **go-mysql-server**?
 
 ## Installation
 
-The import path for the package is `github.com/dolthub/go-mysql-server`.
+The import path for the package is `vitess.io/vitess/go/test/go-mysql-server`.
 
 To install it, run:
 
 ```
-go install github.com/dolthub/go-mysql-server@latest
+go install vitess.io/vitess/go/test/go-mysql-server@latest
 ```
 
 Or to add it as a dependency to your project, in the directory with the go.mod file, run:
 
 ```
-go get github.com/dolthub/go-mysql-server@latest
+go get vitess.io/vitess/go/test/go-mysql-server@latest
 ```
 
 ## Go Documentation
 
-* [go-mysql-server godoc](https://godoc.org/github.com/dolthub/go-mysql-server)
+* [go-mysql-server godoc](https://godoc.org/vitess.io/vitess/go/test/go-mysql-server)
 
 ## SQL syntax
 
@@ -277,12 +277,12 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/dolthub/go-mysql-server/sql/information_schema"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/information_schema"
 
-	sqle "github.com/dolthub/go-mysql-server"
-	"github.com/dolthub/go-mysql-server/memory"
-	"github.com/dolthub/go-mysql-server/server"
-	"github.com/dolthub/go-mysql-server/sql"
+	sqle "vitess.io/vitess/go/test/go-mysql-server"
+	"vitess.io/vitess/go/test/go-mysql-server/memory"
+	"vitess.io/vitess/go/test/go-mysql-server/server"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 var (

@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 const (
@@ -133,7 +133,6 @@ func (t transactionCommittingIter) Close(ctx *sql.Context) error {
 
 	commitTransaction := ((tx != nil) && !ctx.GetIgnoreAutoCommit()) && autocommit
 	if commitTransaction {
-		ctx.GetLogger().Tracef("committing transaction %s", tx)
 		if err := ctx.Session.CommitTransaction(ctx, t.transactionDatabase, tx); err != nil {
 			return err
 		}

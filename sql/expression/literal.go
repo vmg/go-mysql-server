@@ -19,7 +19,7 @@ import (
 
 	"github.com/shopspring/decimal"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // Literal represents a literal expression (string, number, bool, ...).

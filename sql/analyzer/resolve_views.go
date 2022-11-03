@@ -17,11 +17,11 @@ package analyzer
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/mysql_db"
-	"github.com/dolthub/go-mysql-server/sql/parse"
-	"github.com/dolthub/go-mysql-server/sql/plan"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/mysql_db"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/parse"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/plan"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 )
 
 func resolveViews(ctx *sql.Context, a *Analyzer, n sql.Node, scope *Scope, sel RuleSelector) (sql.Node, transform.TreeIdentity, error) {

@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/dolthub/vitess/go/sqltypes"
+	"vitess.io/vitess/go/sqltypes"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

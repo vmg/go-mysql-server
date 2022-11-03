@@ -17,7 +17,7 @@ package plan
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // ExistsSubquery is an expression that checks that a subquery returns a non-empty result set. It's in the plan package,

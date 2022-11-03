@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
 )
 
 // Sqrt is a function that returns the square value of the number provided.

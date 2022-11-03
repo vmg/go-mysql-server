@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // Union is a node that returns everything in Left and then everything in Right

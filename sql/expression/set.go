@@ -19,7 +19,7 @@ import (
 
 	"gopkg.in/src-d/go-errors.v1"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 var errCannotSetField = errors.NewKind("Expected GetField expression on left but got %T")

@@ -19,7 +19,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // ChildParentMapping is a mapping from the foreign key columns of a child schema to the parent schema. The position

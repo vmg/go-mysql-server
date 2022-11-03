@@ -23,7 +23,7 @@ import (
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 func newJoinIter(ctx *sql.Context, j *JoinNode, row sql.Row) (sql.RowIter, error) {

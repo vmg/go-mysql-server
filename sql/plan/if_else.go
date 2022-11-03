@@ -17,7 +17,7 @@ package plan
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // IfConditional represents IF statements only.

@@ -15,7 +15,7 @@
 package expression
 
 import (
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 type BindVar struct {

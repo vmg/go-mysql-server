@@ -9,10 +9,10 @@ import (
 	"io"
 	"os"
 
-	"github.com/dolthub/go-mysql-server/sql/analyzer"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/analyzer"
 
-	"github.com/dolthub/go-mysql-server/optgen/cmd/support"
-	"github.com/dolthub/go-mysql-server/sql/expression/function/aggregation"
+	"vitess.io/vitess/go/test/go-mysql-server/optgen/cmd/support"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression/function/aggregation"
 )
 
 var (

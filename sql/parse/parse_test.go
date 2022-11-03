@@ -21,18 +21,18 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dolthub/vitess/go/sqltypes"
-	"github.com/dolthub/vitess/go/vt/sqlparser"
 	"github.com/pmezard/go-difflib/difflib"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/src-d/go-errors.v1"
+	"vitess.io/vitess/go/sqltypes"
+	"vitess.io/vitess/go/test/go-mysql-server/internal/sqlparser"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/expression/function/aggregation"
-	"github.com/dolthub/go-mysql-server/sql/plan"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression/function/aggregation"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/plan"
 )
 
 var showCollationProjection = plan.NewProject([]sql.Expression{

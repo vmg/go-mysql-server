@@ -14,7 +14,7 @@
 
 package plan
 
-import "github.com/dolthub/go-mysql-server/sql"
+import "vitess.io/vitess/go/test/go-mysql-server/sql"
 
 // Nothing is a node that will return no rows.
 var Nothing nothing

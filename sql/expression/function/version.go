@@ -17,7 +17,7 @@ package function
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 const mysqlVersion = "8.0.11"

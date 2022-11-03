@@ -17,7 +17,7 @@ package sql
 import (
 	"sync"
 
-	querypb "github.com/dolthub/vitess/go/vt/proto/query"
+	querypb "vitess.io/vitess/go/vt/proto/query"
 )
 
 const (

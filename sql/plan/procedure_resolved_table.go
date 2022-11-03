@@ -15,8 +15,8 @@
 package plan
 
 import (
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 )
 
 // ProcedureResolvedTable represents a resolved SQL Table inside of a stored procedure. These are initially resolved to

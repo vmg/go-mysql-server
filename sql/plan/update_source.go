@@ -17,9 +17,9 @@ package plan
 import (
 	"strings"
 
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // UpdateSource is the source of updates for an Update node. Its schema is the concatenation of the old and new rows,

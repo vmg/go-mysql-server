@@ -24,7 +24,6 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/sirupsen/logrus"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 	"golang.org/x/sync/errgroup"
@@ -45,7 +44,7 @@ const (
 	collationConnectionSysVarName    = "collation_connection"
 )
 
-var NoopTracer = trace.NewNoopTracerProvider().Tracer("github.com/dolthub/go-mysql-server/sql")
+var NoopTracer = trace.NewNoopTracerProvider().Tracer("vitess.io/vitess/go/test/go-mysql-server/sql")
 var _, noopSpan = NoopTracer.Start(context.Background(), "noop")
 
 // Client holds session user information.
@@ -114,13 +113,6 @@ type Session interface {
 	SetIgnoreAutoCommit(ignore bool)
 	// GetIgnoreAutoCommit returns whether this session should ignore the @@autocommit variable
 	GetIgnoreAutoCommit() bool
-	// GetLogger returns the logger for this session, useful if clients want to log messages with the same format / output
-	// as the running server. Clients should instantiate their own global logger with formatting options, and session
-	// implementations should return the logger to be used for the running server.
-	GetLogger() *logrus.Entry
-	// SetLogger sets the logger to use for this session, which will always be an extension of the one returned by
-	// GetLogger, extended with session information
-	SetLogger(*logrus.Entry)
 	// GetIndexRegistry returns the index registry for this session
 	GetIndexRegistry() *IndexRegistry
 	// GetViewRegistry returns the view registry for this session
@@ -168,7 +160,6 @@ type BaseSession struct {
 	mu sync.RWMutex
 
 	// |mu| protects the following state
-	logger           *logrus.Entry
 	currentDB        string
 	systemVars       map[string]interface{}
 	userVars         map[string]interface{}
@@ -181,23 +172,6 @@ type BaseSession struct {
 	lastQueryInfo    map[string]int64
 	tx               Transaction
 	ignoreAutocommit bool
-}
-
-func (s *BaseSession) GetLogger() *logrus.Entry {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-
-	if s.logger == nil {
-		log := logrus.StandardLogger()
-		s.logger = logrus.NewEntry(log)
-	}
-	return s.logger
-}
-
-func (s *BaseSession) SetLogger(logger *logrus.Entry) {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-	s.logger = logger
 }
 
 func (s *BaseSession) SetIgnoreAutoCommit(ignore bool) {

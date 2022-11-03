@@ -17,10 +17,10 @@ package expression
 import (
 	"testing"
 
-	"github.com/dolthub/vitess/go/vt/proto/query"
 	"github.com/stretchr/testify/require"
+	"vitess.io/vitess/go/vt/proto/query"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 func TestBinary(t *testing.T) {

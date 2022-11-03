@@ -17,7 +17,7 @@ package plan
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // ForeignKeyHandler handles all referencing and cascading operations that would need to be executed for an operation

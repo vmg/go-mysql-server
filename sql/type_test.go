@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/dolthub/vitess/go/vt/sqlparser"
 	"github.com/stretchr/testify/assert"
+	"vitess.io/vitess/go/test/go-mysql-server/internal/sqlparser"
 )
 
 func TestIsGeometry(t *testing.T) {

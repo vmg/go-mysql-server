@@ -21,8 +21,8 @@ import (
 
 	"github.com/shopspring/decimal"
 
-	"github.com/dolthub/vitess/go/sqltypes"
-	"github.com/dolthub/vitess/go/vt/proto/query"
+	"vitess.io/vitess/go/sqltypes"
+	"vitess.io/vitess/go/vt/proto/query"
 )
 
 var systemBoolValueType = reflect.TypeOf(int8(0))

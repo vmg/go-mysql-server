@@ -14,7 +14,7 @@
 
 package sql
 
-import "github.com/dolthub/go-mysql-server/sql/encodings"
+import "vitess.io/vitess/go/test/go-mysql-server/sql/encodings"
 
 // CharacterSet represents the character set of a string.
 type CharacterSet struct {

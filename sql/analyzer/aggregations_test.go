@@ -19,11 +19,11 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/dolthub/go-mysql-server/memory"
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/expression/function/aggregation"
-	"github.com/dolthub/go-mysql-server/sql/plan"
+	"vitess.io/vitess/go/test/go-mysql-server/memory"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression/function/aggregation"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/plan"
 )
 
 func TestFlattenAggregationExprs(t *testing.T) {

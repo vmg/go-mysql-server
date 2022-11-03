@@ -24,7 +24,7 @@ import (
 	"golang.org/x/text/message"
 	"golang.org/x/text/number"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // Format function returns a result of NumValue rounded to NumDecimalPlaces as a string.

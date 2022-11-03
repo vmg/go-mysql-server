@@ -24,8 +24,8 @@ import (
 
 	"github.com/shopspring/decimal"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/encodings"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/encodings"
 )
 
 // Ascii implements the sql function "ascii" which returns the numeric value of the leftmost character

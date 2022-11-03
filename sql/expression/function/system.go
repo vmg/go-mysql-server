@@ -14,7 +14,7 @@
 
 package function
 
-import "github.com/dolthub/go-mysql-server/sql"
+import "vitess.io/vitess/go/test/go-mysql-server/sql"
 
 type ConnectionID struct {
 	NoArgFunc

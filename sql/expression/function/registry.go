@@ -19,10 +19,10 @@ import (
 
 	"gopkg.in/src-d/go-errors.v1"
 
-	"github.com/dolthub/go-mysql-server/internal/similartext"
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression/function/aggregation"
-	"github.com/dolthub/go-mysql-server/sql/expression/function/aggregation/window"
+	"vitess.io/vitess/go/test/go-mysql-server/internal/similartext"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression/function/aggregation"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression/function/aggregation/window"
 )
 
 // ErrFunctionAlreadyRegistered is thrown when a function is already registered

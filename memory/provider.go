@@ -5,8 +5,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/dolthub/go-mysql-server/internal/similartext"
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/internal/similartext"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 var _ sql.DatabaseProvider = memoryDBProvider{}

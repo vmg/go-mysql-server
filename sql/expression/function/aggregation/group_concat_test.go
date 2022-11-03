@@ -17,11 +17,11 @@ package aggregation
 import (
 	"testing"
 
-	"github.com/dolthub/vitess/go/vt/proto/query"
 	"github.com/stretchr/testify/require"
+	"vitess.io/vitess/go/vt/proto/query"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
 )
 
 func TestGroupConcat_FunctionName(t *testing.T) {

@@ -19,8 +19,8 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/dolthub/vitess/go/sqltypes"
-	"github.com/dolthub/vitess/go/vt/proto/query"
+	"vitess.io/vitess/go/sqltypes"
+	"vitess.io/vitess/go/vt/proto/query"
 )
 
 var tupleValueType = reflect.TypeOf((*[]interface{})(nil)).Elem()

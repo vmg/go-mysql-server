@@ -17,12 +17,12 @@ package plan
 import (
 	"testing"
 
-	"github.com/dolthub/vitess/go/sqltypes"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"vitess.io/vitess/go/sqltypes"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
 )
 
 func TestAddColumnToSchema(t *testing.T) {

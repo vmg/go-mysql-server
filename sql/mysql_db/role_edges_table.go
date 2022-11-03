@@ -17,11 +17,11 @@ package mysql_db
 import (
 	"fmt"
 
-	"github.com/dolthub/vitess/go/sqltypes"
+	"vitess.io/vitess/go/sqltypes"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/in_mem_table"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/in_mem_table"
 )
 
 const roleEdgesTblName = "role_edges"

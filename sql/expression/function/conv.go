@@ -20,7 +20,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // Conv function converts numbers between different number bases. Returns a string representation of the number N, converted from base from_base to base to_base.

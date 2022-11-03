@@ -25,12 +25,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dolthub/vitess/go/sqltypes"
 	errors "gopkg.in/src-d/go-errors.v1"
+	"vitess.io/vitess/go/sqltypes"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 )
 
 // TableStatistics holds the table statistics for in-memory tables

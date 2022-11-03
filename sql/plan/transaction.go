@@ -17,9 +17,9 @@ package plan
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql/mysql_db"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/mysql_db"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // StartTransaction explicitly starts a transaction. Transactions also start before any statement execution that doesn't have a

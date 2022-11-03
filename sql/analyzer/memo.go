@@ -18,10 +18,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/dolthub/go-mysql-server/optgen/cmd/support"
+	"vitess.io/vitess/go/test/go-mysql-server/optgen/cmd/support"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/plan"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/plan"
 )
 
 //go:generate optgen -out memo.og.go -pkg analyzer memo memo.go

@@ -19,7 +19,7 @@ import (
 
 	"github.com/cespare/xxhash"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // InTuple is an expression that checks an expression is inside a list of expressions.

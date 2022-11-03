@@ -17,9 +17,10 @@ package plan
 import (
 	"io"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/vt/log"
 )
 
 type TriggerEvent string
@@ -271,9 +272,9 @@ func (t *TriggerRollback) RowIter(ctx *sql.Context, row sql.Row) (sql.RowIter, e
 		return nil, err
 	}
 
-	ctx.GetLogger().Tracef("TriggerRollback creating savepoint: %s", SavePointName)
+	log.Infof("TriggerRollback creating savepoint: %s", SavePointName)
 	if err := t.Db.CreateSavepoint(ctx, ctx.GetTransaction(), SavePointName); err != nil {
-		ctx.GetLogger().WithError(err).Errorf("CreateSavepoint failed")
+		log.Errorf("CreateSavepoint failed")
 	}
 
 	return &triggerRollbackIter{
@@ -302,10 +303,10 @@ func (t *triggerRollbackIter) Next(ctx *sql.Context) (row sql.Row, returnErr err
 	// Rollback if error occurred
 	if err != nil && err != io.EOF {
 		if err := t.db.RollbackToSavepoint(ctx, ctx.GetTransaction(), SavePointName); err != nil {
-			ctx.GetLogger().WithError(err).Errorf("Unexpected error when calling RollbackToSavePoint during triggerRollbackIter.Next()")
+			log.Errorf("Unexpected error when calling RollbackToSavePoint during triggerRollbackIter.Next()")
 		}
 		if err := t.db.ReleaseSavepoint(ctx, ctx.GetTransaction(), SavePointName); err != nil {
-			ctx.GetLogger().WithError(err).Errorf("Unexpected error when calling ReleaseSavepoint during triggerRollbackIter.Next()")
+			log.Errorf("Unexpected error when calling ReleaseSavepoint during triggerRollbackIter.Next()")
 		} else {
 			t.hasSavepoint = false
 		}
@@ -317,7 +318,7 @@ func (t *triggerRollbackIter) Next(ctx *sql.Context) (row sql.Row, returnErr err
 func (t *triggerRollbackIter) Close(ctx *sql.Context) error {
 	if t.hasSavepoint {
 		if err := t.db.ReleaseSavepoint(ctx, ctx.GetTransaction(), SavePointName); err != nil {
-			ctx.GetLogger().WithError(err).Errorf("Unexpected error when calling ReleaseSavepoint during triggerRollbackIter.Close()")
+			log.Errorf("Unexpected error when calling ReleaseSavepoint during triggerRollbackIter.Close()")
 		}
 		t.hasSavepoint = false
 	}

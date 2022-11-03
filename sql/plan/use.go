@@ -17,7 +17,7 @@ package plan
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // Use changes the current database.
@@ -66,7 +66,6 @@ func (u *Use) RowIter(ctx *sql.Context, row sql.Row) (sql.RowIter, error) {
 	}
 
 	ctx.SetCurrentDatabase(db.Name())
-	ctx.SetLogger(ctx.GetLogger().WithField(sql.ConnectionDbLogField, db.Name()))
 
 	return sql.RowsToRowIter(), nil
 }

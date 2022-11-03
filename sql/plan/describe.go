@@ -18,7 +18,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // Describe is a node that describes its children.

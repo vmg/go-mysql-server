@@ -18,11 +18,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/dolthub/vitess/go/vt/sqlparser"
+	"vitess.io/vitess/go/test/go-mysql-server/internal/sqlparser"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/plan"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/plan"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 )
 
 // processTruncate is a combination of resolving fields in *plan.DeleteFrom and *plan.Truncate, validating the fields,

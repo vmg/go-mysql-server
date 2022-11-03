@@ -15,12 +15,12 @@
 package analyzer
 
 import (
-	"github.com/dolthub/vitess/go/mysql"
+	"vitess.io/vitess/go/mysql"
 
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/plan"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/plan"
 )
 
 // validatePrivileges verifies the given statement (node n) by checking that the calling user has the necessary privileges

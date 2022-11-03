@@ -19,14 +19,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sirupsen/logrus"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 	errors "gopkg.in/src-d/go-errors.v1"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 )
 
 var (
@@ -181,16 +180,9 @@ func (c *CreateIndex) RowIter(ctx *sql.Context, row sql.Row) (sql.RowIter, error
 		return nil, err
 	}
 
-	log := logrus.WithFields(logrus.Fields{
-		"id":     index.ID(),
-		"driver": index.Driver(),
-	})
-
 	createIndex := func() {
-		c.createIndex(ctx, log, driver, index, iter, created, ready)
+		c.createIndex(ctx, driver, index, iter, created, ready)
 	}
-
-	log.Info("starting to save the index")
 
 	createIndex()
 
@@ -199,7 +191,6 @@ func (c *CreateIndex) RowIter(ctx *sql.Context, row sql.Row) (sql.RowIter, error
 
 func (c *CreateIndex) createIndex(
 	ctx *sql.Context,
-	log *logrus.Entry,
 	driver sql.IndexDriver,
 	index sql.DriverIndex,
 	iter sql.PartitionIndexKeyValueIter,
@@ -215,27 +206,22 @@ func (c *CreateIndex) createIndex(
 	)
 	defer span.End()
 
-	l := log.WithField("id", index.ID())
-
-	err := driver.Save(ctx, index, newLoggingPartitionKeyValueIter(l, iter))
+	err := driver.Save(ctx, index, newLoggingPartitionKeyValueIter(iter))
 	close(done)
 
 	if err != nil {
 		span.RecordError(err)
 
 		ctx.Error(0, "unable to save the index: %s", err)
-		logrus.WithField("err", err).Error("unable to save the index")
 
 		deleted, err := ctx.GetIndexRegistry().DeleteIndex(index.Database(), index.ID(), true)
 		if err != nil {
 			ctx.Error(0, "unable to delete index: %s", err)
-			logrus.WithField("err", err).Error("unable to delete the index")
 		} else {
 			<-deleted
 		}
 	} else {
 		<-ready
-		log.Info("index successfully created")
 	}
 }
 
@@ -399,17 +385,14 @@ func (i *evalKeyValueIter) Close(ctx *sql.Context) error {
 }
 
 type loggingPartitionKeyValueIter struct {
-	log  *logrus.Entry
 	iter sql.PartitionIndexKeyValueIter
 	rows uint64
 }
 
 func newLoggingPartitionKeyValueIter(
-	log *logrus.Entry,
 	iter sql.PartitionIndexKeyValueIter,
 ) *loggingPartitionKeyValueIter {
 	return &loggingPartitionKeyValueIter{
-		log:  log,
 		iter: iter,
 	}
 }
@@ -420,7 +403,7 @@ func (i *loggingPartitionKeyValueIter) Next(ctx *sql.Context) (sql.Partition, sq
 		return nil, nil, err
 	}
 
-	return p, newLoggingKeyValueIter(i.log, iter, &i.rows), nil
+	return p, newLoggingKeyValueIter(iter, &i.rows), nil
 }
 
 func (i *loggingPartitionKeyValueIter) Close(ctx *sql.Context) error {
@@ -429,19 +412,16 @@ func (i *loggingPartitionKeyValueIter) Close(ctx *sql.Context) error {
 
 type loggingKeyValueIter struct {
 	span  trace.Span
-	log   *logrus.Entry
 	iter  sql.IndexKeyValueIter
 	rows  *uint64
 	start time.Time
 }
 
 func newLoggingKeyValueIter(
-	log *logrus.Entry,
 	iter sql.IndexKeyValueIter,
 	rows *uint64,
 ) *loggingKeyValueIter {
 	return &loggingKeyValueIter{
-		log:   log,
 		iter:  iter,
 		start: time.Now(),
 		rows:  rows,
@@ -456,11 +436,6 @@ func (i *loggingKeyValueIter) Next(ctx *sql.Context) ([]interface{}, []byte, err
 	(*i.rows)++
 	if *i.rows%sql.IndexBatchSize == 0 {
 		duration := time.Since(i.start)
-
-		i.log.WithFields(logrus.Fields{
-			"duration": duration,
-			"rows":     *i.rows,
-		}).Debugf("still creating index")
 
 		if i.span != nil {
 			i.span.SetAttributes(attribute.Stringer("duration", duration))

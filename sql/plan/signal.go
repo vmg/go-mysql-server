@@ -18,9 +18,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/dolthub/vitess/go/mysql"
+	"vitess.io/vitess/go/mysql"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // SignalConditionItemName represents the item name for the set conditions of a SIGNAL statement.

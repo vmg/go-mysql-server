@@ -19,7 +19,7 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // Eventually these structures should be replaced by memory tables, however at the time of writing this file, the

@@ -19,11 +19,11 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/plan"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/plan"
 )
 
 // constructJoinPlan finds an optimal table ordering and access plan
@@ -164,10 +164,6 @@ func replanJoin(ctx *sql.Context, n *plan.JoinNode, a *Analyzer, scope *Scope) (
 
 	addLookupJoins(m)
 	addHashJoins(m)
-
-	if a.Verbose && a.Debug {
-		ctx.GetLogger().Logger.Println(m.String())
-	}
 
 	if hint := extractJoinHint(n); !hint.IsEmpty() {
 		// this should probably happen earlier, but the root is not

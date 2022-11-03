@@ -17,13 +17,13 @@ package expression_test
 import (
 	"testing"
 
-	"github.com/dolthub/vitess/go/sqltypes"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/src-d/go-errors.v1"
+	"vitess.io/vitess/go/sqltypes"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/expression/function"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression/function"
 )
 
 func TestInTuple(t *testing.T) {

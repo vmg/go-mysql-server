@@ -22,8 +22,8 @@ import (
 	"sync"
 	"unicode/utf8"
 
-	"github.com/dolthub/go-mysql-server/internal/regex"
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/internal/regex"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 func newDefaultLikeMatcher(likeStr string) (regex.DisposableMatcher, error) {

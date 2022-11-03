@@ -18,9 +18,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/dolthub/go-mysql-server/sql/mysql_db"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/mysql_db"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // ShowGrants represents the statement SHOW GRANTS.

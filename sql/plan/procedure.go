@@ -20,9 +20,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dolthub/go-mysql-server/sql/expression"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/expression"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // ProcedureSecurityContext determines whether the stored procedure is executed using the privileges of the definer or

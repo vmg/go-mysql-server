@@ -22,13 +22,13 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/dolthub/vitess/go/sqltypes"
-	"github.com/dolthub/vitess/go/vt/proto/query"
 	"github.com/shopspring/decimal"
 	"gopkg.in/src-d/go-errors.v1"
+	"vitess.io/vitess/go/sqltypes"
+	"vitess.io/vitess/go/vt/proto/query"
 
-	istrings "github.com/dolthub/go-mysql-server/internal/strings"
-	"github.com/dolthub/go-mysql-server/sql/encodings"
+	istrings "vitess.io/vitess/go/test/go-mysql-server/internal/strings"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/encodings"
 )
 
 const (

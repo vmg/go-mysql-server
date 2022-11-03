@@ -3,8 +3,8 @@
 package plan
 
 import (
-	"github.com/dolthub/go-mysql-server/sql"
-	agg "github.com/dolthub/go-mysql-server/sql/expression/function/aggregation"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	agg "vitess.io/vitess/go/test/go-mysql-server/sql/expression/function/aggregation"
 )
 
 type RowsUnboundedPrecedingToNPrecedingFrame struct {

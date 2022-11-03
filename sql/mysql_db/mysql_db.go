@@ -18,18 +18,14 @@ import (
 	"bytes"
 	"crypto/sha1"
 	"encoding/hex"
-	"encoding/json"
 	"fmt"
 	"net"
-	"sort"
 	"strings"
 	"sync"
 
-	"github.com/dolthub/vitess/go/mysql"
-	flatbuffers "github.com/google/flatbuffers/go"
+	"vitess.io/vitess/go/mysql"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/mysql_db/serial"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // MySQLDbPersistence is used to determine the behavior of how certain tables in MySQLDb will be persisted.
@@ -74,7 +70,6 @@ type MySQLDb struct {
 }
 
 var _ sql.Database = (*MySQLDb)(nil)
-var _ mysql.AuthServer = (*MySQLDb)(nil)
 
 // CreateEmptyMySQLDb returns a collection of MySQL Tables that do not contain any data.
 func CreateEmptyMySQLDb() *MySQLDb {
@@ -140,58 +135,7 @@ func (db *MySQLDb) LoadData(ctx *sql.Context, buf []byte) (err error) {
 		return nil
 	}
 
-	type privDataJson struct {
-		Users []*User
-		Roles []*RoleEdge
-	}
-
-	// if it's a json file, read it; will be rewritten as flatbuffer later
-	data := &privDataJson{}
-	if err := json.Unmarshal(buf, data); err == nil {
-		return db.LoadPrivilegeData(ctx, data.Users, data.Roles)
-	}
-
-	// Indicate that mysql db exists
-	db.Enabled = true
-
-	// Recover from panics
-	defer func() {
-		if recover() != nil {
-			err = fmt.Errorf("ill formatted privileges file")
-		}
-	}()
-
-	// Deserialize the flatbuffer
-	serialMySQLDb := serial.GetRootAsMySQLDb(buf, 0)
-
-	// Fill in user table
-	for i := 0; i < serialMySQLDb.UserLength(); i++ {
-		serialUser := new(serial.User)
-		if !serialMySQLDb.User(serialUser, i) {
-			continue
-		}
-		user := LoadUser(serialUser)
-		if err := db.user.data.Put(ctx, user); err != nil {
-			return err
-		}
-	}
-
-	// Fill in Roles table
-	for i := 0; i < serialMySQLDb.RoleEdgesLength(); i++ {
-		serialRoleEdge := new(serial.RoleEdge)
-		if !serialMySQLDb.RoleEdges(serialRoleEdge, i) {
-			continue
-		}
-		role := LoadRoleEdge(serialRoleEdge)
-		if err := db.role_edges.data.Put(ctx, role); err != nil {
-			return err
-		}
-	}
-
-	db.clearCache()
-
-	// TODO: fill in other tables when they exist
-	return
+	panic("unsupported: serialization")
 }
 
 // SetPersister sets the custom persister to be used when the MySQL Db tables have been updated and need to be persisted.
@@ -408,11 +352,6 @@ func (db *MySQLDb) AuthMethod(user, addr string) (string, error) {
 	return u.Plugin, nil
 }
 
-// Salt implements the interface mysql.AuthServer.
-func (db *MySQLDb) Salt() ([]byte, error) {
-	return mysql.NewSalt()
-}
-
 // ValidateHash implements the interface mysql.AuthServer. This is called when the method used is "mysql_native_password".
 func (db *MySQLDb) ValidateHash(salt []byte, user string, authResponse []byte, addr net.Addr) (mysql.Getter, error) {
 	var host string
@@ -448,102 +387,12 @@ func (db *MySQLDb) ValidateHash(salt []byte, user string, authResponse []byte, a
 
 // Negotiate implements the interface mysql.AuthServer. This is called when the method used is not "mysql_native_password".
 func (db *MySQLDb) Negotiate(c *mysql.Conn, user string, addr net.Addr) (mysql.Getter, error) {
-	var host string
-	var err error
-	if addr.Network() == "unix" {
-		host = "localhost"
-	} else {
-		host, _, err = net.SplitHostPort(addr.String())
-		if err != nil {
-			return nil, err
-		}
-	}
-
-	connUser := MysqlConnectionUser{User: user, Host: host}
-	if !db.Enabled {
-		return connUser, nil
-	}
-	userEntry := db.GetUser(user, host, false)
-
-	if userEntry.Plugin != "" {
-		authplugin, ok := db.plugins[userEntry.Plugin]
-		if !ok {
-			return nil, mysql.NewSQLError(mysql.ERAccessDeniedError, mysql.SSAccessDeniedError, "Access denied for user '%v'; auth plugin %s not registered with server", user, userEntry.Plugin)
-		}
-		pass, err := mysql.AuthServerReadPacketString(c)
-		if err != nil {
-			return nil, err
-		}
-		authed, err := authplugin.Authenticate(db, user, userEntry, pass)
-		if err != nil {
-			return nil, mysql.NewSQLError(mysql.ERAccessDeniedError, mysql.SSAccessDeniedError, "Access denied for user '%v': %v", user, err)
-		}
-		if !authed {
-			return nil, mysql.NewSQLError(mysql.ERAccessDeniedError, mysql.SSAccessDeniedError, "Access denied for user '%v'", user)
-		}
-		return connUser, nil
-	}
-	return nil, fmt.Errorf(`the only user login interface currently supported is "mysql_native_password"`)
+	panic("unsupported: Negotiate")
 }
 
 // Persist passes along all changes to the integrator.
 func (db *MySQLDb) Persist(ctx *sql.Context) error {
-	defer db.clearCache()
-
-	// Extract all user entries from table, and sort
-	userEntries := db.user.data.ToSlice(ctx)
-	users := make([]*User, 0)
-	for _, userEntry := range userEntries {
-		user := userEntry.(*User)
-		if user.IsSuperUser {
-			continue
-		}
-		users = append(users, user)
-	}
-	sort.Slice(users, func(i, j int) bool {
-		if users[i].Host == users[j].Host {
-			return users[i].User < users[j].User
-		}
-		return users[i].Host < users[j].Host
-	})
-
-	// Extract all role entries from table, and sort
-	roleEntries := db.role_edges.data.ToSlice(ctx)
-	roles := make([]*RoleEdge, len(roleEntries))
-	for i, roleEntry := range roleEntries {
-		roles[i] = roleEntry.(*RoleEdge)
-	}
-	sort.Slice(roles, func(i, j int) bool {
-		if roles[i].FromHost == roles[j].FromHost {
-			if roles[i].FromUser == roles[j].FromUser {
-				if roles[i].ToHost == roles[j].ToHost {
-					return roles[i].ToUser < roles[j].ToUser
-				}
-				return roles[i].ToHost < roles[j].ToHost
-			}
-			return roles[i].FromUser < roles[j].FromUser
-		}
-		return roles[i].FromHost < roles[j].FromHost
-	})
-
-	// TODO: serialize other tables when the exist
-
-	// Create flatbuffer
-	b := flatbuffers.NewBuilder(0)
-	user := serializeUser(b, users)
-	roleEdge := serializeRoleEdge(b, roles)
-
-	// Write MySQL DB
-	serial.MySQLDbStart(b)
-	serial.MySQLDbAddUser(b, user)
-	serial.MySQLDbAddRoleEdges(b, roleEdge)
-	mysqlDbOffset := serial.MySQLDbEnd(b)
-
-	// Finish writing
-	b.Finish(mysqlDbOffset)
-
-	// Persist data
-	return db.persister.Persist(ctx, b.FinishedBytes())
+	panic("unsupported: serialization")
 }
 
 // UserTable returns the "user" table.

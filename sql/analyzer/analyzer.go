@@ -15,18 +15,17 @@
 package analyzer
 
 import (
-	"fmt"
 	"os"
 	"reflect"
 	"strings"
 
 	"github.com/pmezard/go-difflib/difflib"
-	"github.com/sirupsen/logrus"
 	"go.opentelemetry.io/otel/attribute"
 	"gopkg.in/src-d/go-errors.v1"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/vt/log"
 )
 
 const debugAnalyzerKey = "DEBUG_ANALYZER"
@@ -171,38 +170,6 @@ func (ab *Builder) RemoveAfterAllRule(id RuleId) *Builder {
 	ab.afterAllRules = duplicateRulesWithout(ab.afterAllRules, id)
 
 	return ab
-}
-
-var log = logrus.New()
-
-func init() {
-	// TODO: give the option for debug analyzer logging format to match the global one
-	log.SetFormatter(simpleLogFormatter{})
-}
-
-type simpleLogFormatter struct{}
-
-func (s simpleLogFormatter) Format(entry *logrus.Entry) ([]byte, error) {
-	lvl := ""
-	switch entry.Level {
-	case logrus.PanicLevel:
-		lvl = "PANIC"
-	case logrus.FatalLevel:
-		lvl = "FATAL"
-	case logrus.ErrorLevel:
-		lvl = "ERROR"
-	case logrus.WarnLevel:
-		lvl = "WARN"
-	case logrus.InfoLevel:
-		lvl = "INFO"
-	case logrus.DebugLevel:
-		lvl = "DEBUG"
-	case logrus.TraceLevel:
-		lvl = "TRACE"
-	}
-
-	msg := fmt.Sprintf("%s: %s\n", lvl, entry.Message)
-	return ([]byte)(msg), nil
 }
 
 // Build creates a new Analyzer from the builder parameters

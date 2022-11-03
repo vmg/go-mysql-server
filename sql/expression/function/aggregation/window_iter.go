@@ -18,7 +18,7 @@ import (
 	"errors"
 	"io"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // WindowIter is a wrapper that evaluates a set of WindowPartitionIter.

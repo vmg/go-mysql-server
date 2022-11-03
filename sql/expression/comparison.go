@@ -20,8 +20,8 @@ import (
 
 	errors "gopkg.in/src-d/go-errors.v1"
 
-	"github.com/dolthub/go-mysql-server/internal/regex"
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/internal/regex"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 var ErrInvalidRegexp = errors.NewKind("Invalid regular expression: %s")

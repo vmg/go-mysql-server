@@ -15,8 +15,8 @@
 package mysql_db
 
 import (
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/in_mem_table"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/in_mem_table"
 )
 
 type mysqlTable struct {

@@ -17,10 +17,10 @@ package plan
 import (
 	"fmt"
 
-	"github.com/dolthub/vitess/go/sqltypes"
+	"vitess.io/vitess/go/sqltypes"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/transform"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/transform"
 )
 
 // ShowColumns shows the columns details of a table.

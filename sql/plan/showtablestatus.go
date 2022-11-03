@@ -15,7 +15,7 @@
 package plan
 
 import (
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // ShowTableStatus returns the status of the tables in a database.

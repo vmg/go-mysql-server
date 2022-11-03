@@ -3,8 +3,8 @@ package plan
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/mysql_db"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql/mysql_db"
 )
 
 // TableCopier is a supporting node that allows for the optimization of copying tables. It should be used in two cases.

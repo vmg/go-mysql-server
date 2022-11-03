@@ -17,7 +17,7 @@ package expression
 import (
 	"bytes"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"vitess.io/vitess/go/test/go-mysql-server/sql"
 )
 
 // CaseBranch is a single branch of a case expression.

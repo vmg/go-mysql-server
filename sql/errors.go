@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/dolthub/vitess/go/mysql"
 	"gopkg.in/src-d/go-errors.v1"
+	"vitess.io/vitess/go/mysql"
 )
 
 var (
@@ -627,7 +627,7 @@ var (
 	// ErrCollationNotYetImplementedTemp is returned when the collation is valid but has not yet been implemented.
 	// This error is temporary, and will be removed once all collations have been added.
 	ErrCollationNotYetImplementedTemp = errors.NewKind("The collation `%s` has not yet been implemented, " +
-		"please create an issue at https://github.com/dolthub/go-mysql-server/issues/new and the DoltHub developers will implement it")
+		"please create an issue at https://vitess.io/vitess/go/test/go-mysql-server/issues/new and the DoltHub developers will implement it")
 
 	// ErrCollationIllegalMix is returned when two different collations are used in a scenario where they are not compatible.
 	ErrCollationIllegalMix = errors.NewKind("Illegal mix of collations (%v) and (%v)")
@@ -647,7 +647,7 @@ var (
 	// ErrCharSetNotYetImplementedTemp is returned when the character set is valid but has not yet been implemented.
 	// This error is temporary, and will be removed once all character sets have been added.
 	ErrCharSetNotYetImplementedTemp = errors.NewKind("The character set `%s` has not yet been implemented, " +
-		"please create an issue at https://github.com/dolthub/go-mysql-server/issues/new and the DoltHub developers will implement it")
+		"please create an issue at https://vitess.io/vitess/go/test/go-mysql-server/issues/new and the DoltHub developers will implement it")
 
 	// ErrNoTablesUsed is returned when there is no table provided or dual table is defined with column access.
 	ErrNoTablesUsed = errors.NewKind("No tables used")
