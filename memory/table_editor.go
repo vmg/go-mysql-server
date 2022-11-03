@@ -31,6 +31,7 @@ type tableEditor struct {
 	// array of key ordinals for each unique index defined on the table
 	uniqueIdxCols [][]int
 	fkTable       *Table
+	txlog         []sql.TransactionLogRow
 }
 
 var _ sql.Table = (*tableEditor)(nil)
@@ -94,6 +95,7 @@ func (t *tableEditor) DiscardChanges(ctx *sql.Context, errorEncountered error) e
 	t.table.autoIncVal = t.initialAutoIncVal
 	t.table.partitions = t.initialPartitions
 	t.ea.Clear()
+	t.txlog = t.txlog[:0]
 	return nil
 }
 
@@ -113,6 +115,20 @@ func (t *tableEditor) StatementComplete(ctx *sql.Context) error {
 		}
 		t.initialPartitions[partStr] = newRowSlice
 	}
+
+	if len(t.txlog) > 0 {
+		txlog := &sql.TransactionLog{
+			Database: ctx.GetCurrentDatabase(),
+			Table:    t.table.name,
+			Schema:   t.table.Schema(),
+			Rows:     t.txlog,
+		}
+		if err := ctx.LogTransaction(txlog); err != nil {
+			return err
+		}
+		t.txlog = nil
+	}
+
 	return nil
 }
 
@@ -173,6 +189,7 @@ func (t *tableEditor) Insert(ctx *sql.Context, row sql.Row) error {
 		}
 	}
 
+	t.txlog = append(t.txlog, sql.TransactionLogRow{After: row})
 	return nil
 }
 
@@ -188,6 +205,7 @@ func (t *tableEditor) Delete(ctx *sql.Context, row sql.Row) error {
 		return err
 	}
 
+	t.txlog = append(t.txlog, sql.TransactionLogRow{Before: row})
 	return nil
 }
 
@@ -243,6 +261,7 @@ func (t *tableEditor) Update(ctx *sql.Context, oldRow sql.Row, newRow sql.Row) e
 		return err
 	}
 
+	t.txlog = append(t.txlog, sql.TransactionLogRow{Before: oldRow, After: newRow})
 	return nil
 }
 

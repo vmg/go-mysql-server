@@ -228,12 +228,12 @@ func resolveSystemOrUserVariable(ctx *sql.Context, a *Analyzer, col column) (sql
 	case sqlparser.SetScope_None:
 		return nil, transform.SameTree, nil
 	case sqlparser.SetScope_Global:
-		_, _, ok := sql.SystemVariables.GetGlobal(varName)
+		sysvar, _, ok := sql.SystemVariables.GetGlobal(varName)
 		if !ok {
 			return nil, transform.SameTree, sql.ErrUnknownSystemVariable.New(varName)
 		}
 		a.Log("resolved column %s to global system variable", col)
-		return expression.NewSystemVar(varName, sql.SystemVariableScope_Global), transform.NewTree, nil
+		return expression.NewSystemVar(varName, sysvar.Scope), transform.NewTree, nil
 	case sqlparser.SetScope_Persist:
 		return nil, transform.SameTree, sql.ErrUnsupportedFeature.New("PERSIST")
 	case sqlparser.SetScope_PersistOnly:

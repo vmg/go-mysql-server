@@ -849,6 +849,27 @@ func (c *Context) NewCtxWithClient(client Client) *Context {
 type Services struct {
 	KillConnection func(connID uint32) error
 	LoadInfile     func(filename string) (io.ReadCloser, error)
+
+	LogTransaction func(ctx *Context, tx *TransactionLog) error
+}
+
+type TransactionLog struct {
+	Database string
+	Table    string
+	Schema   Schema
+	Rows     []TransactionLogRow
+}
+
+type TransactionLogRow struct {
+	Before Row
+	After  Row
+}
+
+func (c *Context) LogTransaction(tx *TransactionLog) error {
+	if c.services.LogTransaction != nil {
+		return c.services.LogTransaction(c, tx)
+	}
+	return nil
 }
 
 // NewSpanIter creates a RowIter executed in the given span.

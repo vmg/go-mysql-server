@@ -38,7 +38,7 @@ func (v *SystemVar) Children() []sql.Expression { return nil }
 // Eval implements the sql.Expression interface.
 func (v *SystemVar) Eval(ctx *sql.Context, _ sql.Row) (interface{}, error) {
 	switch v.Scope {
-	case sql.SystemVariableScope_Session:
+	case sql.SystemVariableScope_Session, sql.SystemVariableScope_Both:
 		val, err := ctx.GetSessionVariable(ctx, v.Name)
 		if err != nil {
 			return nil, err
